@@ -1,0 +1,49 @@
+services:
+  web:
+    image: docker.io/tomcat:11
+    ports:
+      - "8081:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./target/dope-webapp.war:/usr/local/tomcat/webapps/dope-webapp.war
+      - ./tmp/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./logs:/usr/local/tomcat/webapps/my-logs
+      - ./tmp/context.xml:/usr/local/tomcat/webapps.dist/manager/META-INF/context.xml
+      - ./tmp/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./data/containerfiles:/tmp/containerfiles
+
+  db:
+    image: docker.io/postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=dopeadm
+      - POSTGRES_PASSWORD=dopeadm
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+      - ./src/main/database/NewRole.sql:/docker-entrypoint-initdb.d/01-roles.sql
+      - ./src/main/database/DataBase.sql:/docker-entrypoint-initdb.d/02-init.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dopeadm"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  podman:
+    image: docker.io/mgoltzsche/podman:latest
+    privileged: true
+    ports:
+      - "127.0.0.1:1234:1234"
+    volumes:
+      - ./data/containerfiles:/tmp/containerfiles
+    command: podman --storage-driver=vfs system service -t 0 tcp://0.0.0.0:1234
+
+  rest-client:
+    image: curlimages/curl:latest
+    depends_on:
+      - web
+    volumes:
+      - ./curl/curl_population.sh:/scripts/curl_population.sh
+    entrypoint: [ "sh", "-c", "sleep 10 && sed 's/\r//' /scripts/curl_population.sh > /tmp/script.sh && sh /tmp/script.sh" ]

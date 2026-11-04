@@ -1,0 +1,111 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>DOPE Webapp</display-name>
+
+    <!-- Filtering -->
+    <filter>
+        <filter-name>ProtectedResourceFilter</filter-name>
+        <filter-class>it.unipd.dei.webapp.dope.filter.ProtectedResourceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ProtectedResourceFilter</filter-name>
+        <url-pattern>/api/protected/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ProtectedResourceFilter</filter-name>
+        <url-pattern>/protected/*</url-pattern>
+    </filter-mapping>
+    <!-- Servlets -->
+
+    <servlet>
+        <servlet-name>RestServlet</servlet-name>
+        <description>REST servlet for DOPE</description>
+        <servlet-class>it.unipd.dei.webapp.dope.servlet.RestDispatcherServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.dope.servlet.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ListUserRepositoriesServlet</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.dope.servlet.ListUserRepositoriesServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>container</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.dope.servlet.ContainerServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ImageDetail</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.dope.servlet.ImageDetailServlet</servlet-class>
+    </servlet>
+
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.dope.servlet.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ListUserRepositoriesServlet</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>container</servlet-name>
+        <url-pattern>/protected/container</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RestServlet</servlet-name>
+        <url-pattern>/api/protected*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RestServlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImageDetail</servlet-name>
+        <url-pattern>/protected/showImage</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>10</session-timeout> <!-- 1 minute timeout for testing purposes -->
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    
+    <resource-ref>
+        <description>Connection pool to the database</description>
+        <res-ref-name>jdbc/dope</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+</web-app>

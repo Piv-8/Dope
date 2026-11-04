@@ -1,0 +1,149 @@
+.logs-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.log-section{
+    flex: 1 1 0;
+    padding: 0;
+}
+
+.log-section label,
+.log-section textarea {
+    display: block;
+    width: 100%;
+    margin: 0;              /* remove default margins */
+}
+
+/* 4) Stack vertically on small screens */
+@media (max-width: 576px) {
+    .logs-row {
+        flex-direction: column;
+    }
+}
+
+.log-section pre:disabled{
+    background-color: var(--surface-light);
+    color: var(--on-surface);
+    transition: all 0.3s;
+}
+
+pre {
+    height: 30em;
+}
+
+/* For small width devices */
+@media (max-width: 576px) {
+    .logs-row {
+        flex-direction: column;
+    }
+    .log-section {
+        width: 100%;      /* ensure full-width when stacked */
+    }
+}
+
+.form-group {
+    padding: 2rem;
+}
+
+.commit-button{
+    margin: 1rem 0 0 1rem
+}
+
+#commandInput {
+    flex: 7;
+    margin-right: 0.5rem;
+}
+
+.containerButtons{
+    position: fixed;
+    bottom: 5rem;
+    right: 5rem;
+    display: flex;
+    gap: 1rem;
+    z-index: 1000;
+    cursor: grab;
+    user-select: none;
+}
+
+.containerButtons.dragging{
+    cursor: grabbing;
+}
+
+#action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--border);
+    border-radius: 8px;
+}
+
+#commitForm {
+    overflow: auto;
+    color: var(--on-surface);
+}
+
+.modal-dialog-scrollable .modal-content{
+    max-height: 80%;
+}
+
+.loading-modal .modal-content {
+    background-color: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--bs-modal);
+    margin-top: 6rem;
+}
+.loading-modal .modal-body {
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: var(--surface-light);
+}
+.loading-spinner {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.5rem;
+}
+.loading-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--on-surface);
+    margin-bottom: 0.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.loading-subtext {
+    font-size: 0.9rem;
+    color: var(--on-surface);
+    opacity: 0.7;
+}
+.custom-spinner {
+    display: inline-block;
+    width: 4rem;
+    height: 4rem;
+    border: 4px solid var(--surface-lighter);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.modal-backdrop {
+    background-color: var(--surface-light);
+    opacity:0.8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+}
+.loading-modal {
+    z-index: 2050 !important;
+}
+.loading-modal .modal-backdrop.show {
+    z-index: 1040 !important;
+}

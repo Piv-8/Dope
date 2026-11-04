@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<Context>
+    <Resource name="jdbc/dope"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://db:5432/dope"
+              username="dope_group"
+              password="admin"
+              testOnBorrow="true"
+              validationQuery="SELECT 1"
+              timeBetweenEvictionRunsMillis="30000"
+              maxActive="10"
+              minIdle="5"
+              maxWait="10000"
+              initialSize="1"
+              removeAbandonedTimeout="60"
+              removeAbandoned="true"
+              closeMethod="close"
+    />
+</Context>

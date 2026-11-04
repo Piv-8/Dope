@@ -1,0 +1,112 @@
+#login-form, #register-form {
+    width: 18.75em;
+    margin: 0 auto;
+    padding: 1.25em;
+    background-color: var(--surface-light);
+    opacity: 0.98;
+    border-radius: 0.5em;
+    box-shadow: 0em 0em 0.625em rgba(0, 0, 0, 0.1);
+    max-height: 80%;
+    overflow: auto;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding-top: 0;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+#regMsg {
+    color: red;
+    margin-top: 0.625em;
+}
+
+.authentication-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.40em;
+}
+
+.birth-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.40em;
+    margin-bottom: 1.4em;
+}
+
+.authentication-form-group label, .birth-form-group label {
+    display: block;
+    margin-bottom: 0.25em;
+    font-weight: 400;
+    color: var(--on-surface);
+    opacity: 0.87;
+}
+
+.authentication-header h2{
+    padding: 0.5em 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--primary);
+    font-family: 'Poppins', sans-serif;
+}
+
+.hidden-sub{
+    display: none;
+}
+
+.authentication-header {
+    position: relative; /* ensure that absolutely-positioned children are relative to this box */
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: var(--on-surface);
+}
+
+
+#theme-toggle:focus {
+    outline: 2px solid #005fcc; /* or match your focus style */
+}
+
+#theme-toggle-register {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: var(--on-surface);
+}
+
+
+#theme-toggle-register:focus {
+    outline: 2px solid #005fcc; /* or match your focus style */
+}
+
+
+
+.btn-primary{
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
